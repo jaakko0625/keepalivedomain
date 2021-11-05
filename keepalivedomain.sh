@@ -8,11 +8,12 @@
 #实现读取文件
 
 #将文件路径储存到file变量中
-file='/keepalivedomain/domain.txt'
+file='./domain.txt'
 
 check_txt(){
-    if[ -f ${file}]; then
+    if [ -f ${file} ]; then
     #如果存在则休眠
+    echo -e "域名存在,程序继续执行"
     sleep 1
     else
     #不存在 输出错误日志
