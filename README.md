@@ -11,3 +11,9 @@
 并将ip保存到文本中替换原有ip
 
 若不相同 休眠
+
+#安装
+centos通过dnf安装依赖
+dnf install bind-utils
+debian通过apt安装依赖
+apt install dnsutils
