@@ -20,3 +20,5 @@ check_txt(){
     exit 1
     fi
 }
+
+check_txt
