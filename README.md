@@ -12,8 +12,14 @@
 
 若不相同 休眠
 
-#安装
+# 安装
 centos通过dnf安装依赖
 dnf install bind-utils
 debian通过apt安装依赖
 apt install dnsutils
+
+
+# 脚本定时运行
+crontab -e
+每隔一分钟运行一次
+*/1 * * * * /root/keepalivedomian/keepdomain.sh

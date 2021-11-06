@@ -27,7 +27,7 @@ check_txt(){
 }
 
 #读取文件
-read_domain(){
+run_record(){
     #根据文件行数执行while循环
     while read -r line || [[ -n $line ]];do
     #第一个与第二个字段为域名 读取当前行的第某个字段
@@ -52,9 +52,9 @@ check_domain(){
 		echo "ip发生变化"
 		supervisorctl -c ${config_file} restart nginx
 		#用新解析IP替换旧的记录
-		#sed -i 's/'$ip_old'/'$ip_new'/g' ${file}
+		sed -i 's/'$ip_old'/'$ip_new'/g' ${file}
 	fi
 }
 
 check_txt
-read_domain
+run_record
