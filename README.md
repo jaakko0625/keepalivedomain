@@ -18,8 +18,12 @@ dnf install bind-utils
 debian通过apt安装依赖
 apt install dnsutils
 
+进入脚本目录 授予可执行权限
+cd ./keepalivedomain/ && chmod +x ./keepalivedomain.sh
+执行脚本
+./keepalivedomain.sh
 
 # 脚本定时运行
 crontab -e
 每隔一分钟运行一次
-*/1 * * * * /root/keepalivedomian/keepdomain.sh
+*/1 * * * * /root/keepalivedomian/keepdomain.sh >/dev/null 2>&1

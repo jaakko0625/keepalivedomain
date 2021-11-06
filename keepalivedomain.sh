@@ -45,7 +45,7 @@ run_record(){
 
 #将旧IP与新IP进行比较
 check_domain(){
-	if [ $ip_old = $ip_new ]
+	if [ ${ip_old} = ${ip_new} ]
 	then
 		echo "ip未发生变化"
 	else #如果域名ip与缓存ip不匹配则执行某些动作
