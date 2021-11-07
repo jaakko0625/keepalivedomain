@@ -1,4 +1,5 @@
 #!/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin/
 
 # 当域名发生变化时执行nginx重启 若无变化则休眠5分钟后再次检测
 # 使用文本储存需要检测的域名 脚本执行时先检测文本内域名得到的ip 同时与上一个保存的ip进行匹配
@@ -8,7 +9,7 @@
 #实现读取文件
 
 #将文件路径储存到file变量中
-file='./domain.txt'
+file='/root/keepalivedomain/domain.txt'
 config_file='/app/lazy_balancer/service/supervisord.conf'
 #转发记录格式:域名1+域名2+IP缓存
 #例子:
