@@ -13,7 +13,7 @@ file='/root/keepalivedomain/domain.txt'
 config_file='/app/lazy_balancer/service/supervisord.conf'
 #转发记录格式:域名1+域名2+IP缓存
 #例子:
-#abc.com abcd.com 11.22.33.44
+#abc.com abcd.com 11.22.33.44 11.22.33.44
 
 check_txt(){
     if [ -f ${file} ]; then
@@ -35,25 +35,42 @@ run_record(){
     domain1=$(echo $line | awk '!/#/{printf$1"\n"}')
     domain2=$(echo $line | awk '!/#/{printf$2"\n"}')
     #第三个字段为缓存IP
-    ip_old=$(echo $line | awk '!/#/{printf$3"\n"}')
-    #读取nslookup域名结果的第二个字段
-    ip_new=$(nslookup ${domain1}|grep Add |awk '!/#/{printf$2"\n"}')
-    echo "old ip: ${ip_old}"
-    echo "new ip: ${ip_new}"
+    ip1_old=$(echo $line | awk '!/#/{printf$3"\n"}')
+    #读取nslookup域名1结果的第二个字段
+    ip2_new=$(nslookup ${domain1}|grep Add |awk '!/#/{printf$2"\n"}')
+    #第四个字段为缓存IP
+    ip1_old=$(echo $line | awk '!/#/{printf$4"\n"}')
+    #读取nslookup域名2结果的第二个字段
+    ip2_new=$(nslookup ${domain2}|grep Add |awk '!/#/{printf$2"\n"}')
+    echo "domian1 old ip: ${ip1_old}"
+    echo "domain1 new ip: ${ip1_new}"
+    echo "domian2 old ip: ${ip2_old}"
+    echo "domain2 new ip: ${ip2_new}"
     done < ${file}
     check_domain
 }
 
 #将旧IP与新IP进行比较
 check_domain(){
-        if [ "${ip_new}" = "${ip_old}" ]
+    #检查ip1
+        if [ "${ip1_new}" = "${ip1_old}" ]
         then
-                echo "ip未发生变化"
+                echo "domain1未发生变化"
         else #如果域名ip与缓存ip不匹配则执行某些动作
-                echo "ip发生变化"
+                echo "domain1发生变化"
                 supervisorctl -c ${config_file} restart nginx
                 #用新解析IP替换旧的记录
-                sed -i 's/'"${ip_old}"'/'"${ip_new}"'/g' ${file}
+                sed -i 's/'"${ip1_old}"'/'"${ip1_new}"'/g' ${file}
+        fi
+        #检查ip2
+        if [ "${ip2_new}" = "${ip2_old}" ]
+        then
+                echo "domain2未发生变化"
+        else #如果域名ip与缓存ip不匹配则执行某些动作
+                echo "domain2发生变化"
+                supervisorctl -c ${config_file} restart nginx
+                #用新解析IP替换旧的记录
+                sed -i 's/'"${ip2_old}"'/'"${ip2_new}"'/g' ${file}
         fi
 }
 

@@ -28,4 +28,4 @@ cd ./keepalivedomain/ && chmod +x ./keepalivedomain.sh
 # 脚本定时运行
 crontab -e
 每隔一分钟运行一次
-*/1 * * * * /root/keepalivedomian/keepdomain.sh >/dev/null 2>&1
+*/1 * * * * /bin/bash /root/keepalivedomain/keepalivedomain.sh > /root/keepalivedomain/log.log 2>&1
