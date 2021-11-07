@@ -15,7 +15,7 @@
 # 安装
 centos通过dnf安装依赖
 dnf install bind-utils
-debian通过apt安装依赖
+debian && ubuntu 通过apt安装依赖
 apt install dnsutils
 
 下载脚本

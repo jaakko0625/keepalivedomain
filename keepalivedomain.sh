@@ -45,15 +45,15 @@ run_record(){
 
 #将旧IP与新IP进行比较
 check_domain(){
-	if [ ${ip_old} = ${ip_new} ]
-	then
-		echo "ip未发生变化"
-	else #如果域名ip与缓存ip不匹配则执行某些动作
-		echo "ip发生变化"
-		supervisorctl -c ${config_file} restart nginx
-		#用新解析IP替换旧的记录
-		sed -i 's/'$ip_old'/'$ip_new'/g' ${file}
-	fi
+        if [ "${ip_new}" = "${ip_old}" ]
+        then
+                echo "ip未发生变化"
+        else #如果域名ip与缓存ip不匹配则执行某些动作
+                echo "ip发生变化"
+                supervisorctl -c ${config_file} restart nginx
+                #用新解析IP替换旧的记录
+                sed -i 's/'"${ip_old}"'/'"${ip_new}"'/g' ${file}
+        fi
 }
 
 check_txt
