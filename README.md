@@ -18,6 +18,8 @@ dnf install bind-utils
 debian通过apt安装依赖
 apt install dnsutils
 
+下载脚本
+git clone https://github.com/jaakko0625/keepalivedomain
 进入脚本目录 授予可执行权限
 cd ./keepalivedomain/ && chmod +x ./keepalivedomain.sh
 执行脚本
