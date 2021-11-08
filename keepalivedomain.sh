@@ -37,9 +37,9 @@ run_record(){
     #第三个字段为缓存IP
     ip1_old=$(echo $line | awk '!/#/{printf$3"\n"}')
     #读取nslookup域名1结果的第二个字段
-    ip2_new=$(nslookup ${domain1}|grep Add |awk '!/#/{printf$2"\n"}')
+    ip1_new=$(nslookup ${domain1}|grep Add |awk '!/#/{printf$2"\n"}')
     #第四个字段为缓存IP
-    ip1_old=$(echo $line | awk '!/#/{printf$4"\n"}')
+    ip2_old=$(echo $line | awk '!/#/{printf$4"\n"}')
     #读取nslookup域名2结果的第二个字段
     ip2_new=$(nslookup ${domain2}|grep Add |awk '!/#/{printf$2"\n"}')
     echo "domian1 old ip: ${ip1_old}"
