@@ -29,3 +29,6 @@ cd ./keepalivedomain/ && chmod +x ./keepalivedomain.sh
 crontab -e
 每隔一分钟运行一次
 */1 * * * * /bin/bash /root/keepalivedomain/keepalivedomain.sh > /root/keepalivedomain/log.log 2>&1
+
+每天早上六点执行一次
+00 */6 * * *  bash /root/ddns.sh >> /root/ddns.log 2>&1
