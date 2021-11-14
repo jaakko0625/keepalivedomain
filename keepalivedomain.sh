@@ -73,7 +73,7 @@ check_domain(){
                 supervisorctl -c ${config_file} restart nginx
                 #用新解析IP替换旧的记录
                 sed -i 's/'"${ip2_old}"'/'"${ip2_new}"'/g' ${file}
-                slppe 60
+                sleep 60
                 exit 1
         fi
 }
