@@ -59,8 +59,8 @@ check_domain(){
         else #如果域名ip与缓存ip不匹配则执行某些动作
                 echo "domain1发生变化"
                 supervisorctl -c ${config_file} restart nginx
-                #用新解析IP替换旧的记录
                 sleep 60
+                #用新解析IP替换旧的记录
                 sed -i 's/'"${ip1_old}"'/'"${ip1_new}"'/g' ${file}
                 exit 1
         fi
@@ -71,9 +71,9 @@ check_domain(){
         else #如果域名ip与缓存ip不匹配则执行某些动作
                 echo "domain2发生变化"
                 supervisorctl -c ${config_file} restart nginx
+                sleep 60
                 #用新解析IP替换旧的记录
                 sed -i 's/'"${ip2_old}"'/'"${ip2_new}"'/g' ${file}
-                sleep 60
                 exit 1
         fi
 }
